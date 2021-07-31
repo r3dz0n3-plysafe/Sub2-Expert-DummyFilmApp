@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_favourite">Favourite</string>
+    <string name="tab_movie">Movie</string>
+    <string name="tab_tv_show">TV Show</string>
+    <string name="no_data">Empty</string>
+</resources>

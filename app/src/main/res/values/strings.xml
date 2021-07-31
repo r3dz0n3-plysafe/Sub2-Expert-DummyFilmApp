@@ -1,0 +1,12 @@
+<resources>
+    <string name="load_error">Gagal mendapatkan Film</string>
+    <string name="delimiter_table_value">:</string>
+    <string name="tbl_tv_release">Release Date</string>
+    <string name="app_name">Dummy Film App</string>
+    <string name="title_activity_favourite">Favourite</string>
+    <string name="tab_movie">Movie</string>
+    <string name="tab_tv_show">TV Show</string>
+    <string name="title_activity_detail">Film Detail</string>
+    <string name="favoured">Ditambahkan ke Favorit</string>
+    <string name="not_favoured">Dihapus dari Favorit</string>
+</resources>

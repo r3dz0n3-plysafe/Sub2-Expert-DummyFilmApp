@@ -1,0 +1,4 @@
+<resources>
+    <string name="click_for_details">Click for Details</string>
+    <string name="base_url_image">https://image.tmdb.org/t/p/w500</string>
+</resources>
