@@ -1,30 +1,21 @@
 package com.dicoding.dummyfilmapp.favourite.ui.fragment
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import com.dicoding.dummyfilmapp.favourite.R
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class FavPagerAdapter(private val mContext: Context, fragmentManager: FragmentManager) :
-    FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class FavPagerAdapter(
+    fragmentManager: FragmentManager,
+    lifecycle: Lifecycle
+) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    companion object {
-        private val TAB_FAV_TITLES = intArrayOf(
-            R.string.tab_movie,
-            R.string.tab_tv_show
-        )
-    }
+    override fun getItemCount(): Int = 2
 
-    override fun getCount(): Int = 2
-
-    override fun getItem(position: Int): Fragment =
+    override fun createFragment(position: Int): Fragment =
         when (position) {
             0 -> MovieFavouriteFragment()
             1 -> TvShowFavouriteFragment()
             else -> MovieFavouriteFragment()
         }
-
-    override fun getPageTitle(position: Int): CharSequence =
-        mContext.resources.getString(TAB_FAV_TITLES[position])
 }

@@ -16,8 +16,8 @@
         app:tabSelectedTextColor="?android:attr/textColorSecondaryInverse"
         app:tabTextColor="@color/dark_gray" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
