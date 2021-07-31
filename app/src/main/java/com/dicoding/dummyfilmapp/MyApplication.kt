@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.dicoding.dummyfilmapp
 
 import android.app.Application
