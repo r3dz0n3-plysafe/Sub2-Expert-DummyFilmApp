@@ -1,6 +1,7 @@
 package com.dicoding.dummyfilmapp.core.di
 
 import androidx.room.Room
+import com.dicoding.dummyfilmapp.core.BuildConfig
 import com.dicoding.dummyfilmapp.core.data.FilmRepository
 import com.dicoding.dummyfilmapp.core.data.source.local.LocalDataSource
 import com.dicoding.dummyfilmapp.core.data.source.local.room.FilmDatabase
@@ -8,6 +9,8 @@ import com.dicoding.dummyfilmapp.core.data.source.remote.RemoteDataSource
 import com.dicoding.dummyfilmapp.core.data.source.remote.network.RetrofitEndPoint
 import com.dicoding.dummyfilmapp.core.domain.repository.IFilmRepository
 import com.dicoding.dummyfilmapp.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -20,10 +23,16 @@ import java.util.concurrent.TimeUnit
 val databaseModule = module {
     factory { get<FilmDatabase>().filmDao() }
     single {
+        // TODO 2.1 : Menerapkan encryption pada database.
+        val passKey = BuildConfig.PASS_KEY
+        val passphrase: ByteArray = SQLiteDatabase.getBytes(passKey.toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
             FilmDatabase::class.java, "film.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 
