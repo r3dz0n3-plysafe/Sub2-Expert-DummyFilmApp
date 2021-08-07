@@ -11,7 +11,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.dicoding.dummyfilmapp"
+        applicationId "com.dicoding.dummyfilmapp.main"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -24,10 +24,6 @@ android {
         testInstrumentationRunnerArgument "listener", "leakcanary.FailTestOnLeakRunListener"
 
         vectorDrawables.useSupportLibrary = true
-    }
-
-    lintOptions {
-        abortOnError false
     }
 
     buildTypes {
@@ -59,6 +55,5 @@ dependencies {
     //noinspection GradleDependency,DifferentStdlibGradleVersion
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     androidTestImplementation project(path: ':favourite')
-    androidTestImplementation "com.squareup.leakcanary:leakcanary-android-instrumentation:2.7"
 
 }

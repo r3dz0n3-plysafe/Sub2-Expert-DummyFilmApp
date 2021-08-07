@@ -26,6 +26,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:3.4.0"
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+    androidTestImplementation "com.squareup.leakcanary:leakcanary-android-instrumentation:2.7"
 
     implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
 }
