@@ -21,6 +21,7 @@ android {
         buildConfigField 'String', "API_KEY", API_KEY
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArgument "listener", "leakcanary.FailTestOnLeakRunListener"
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -53,5 +54,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //noinspection GradleDependency,DifferentStdlibGradleVersion
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    androidTestImplementation project(path: ':favourite')
+    androidTestImplementation "com.squareup.leakcanary:leakcanary-android-instrumentation:2.7"
 
 }

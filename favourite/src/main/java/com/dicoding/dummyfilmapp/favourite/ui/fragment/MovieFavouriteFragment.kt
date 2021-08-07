@@ -8,14 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.dummyfilmapp.core.ui.MovieListAdapter
+import com.dicoding.dummyfilmapp.core.ui.utils.ViewBindingHolder
+import com.dicoding.dummyfilmapp.core.ui.utils.ViewBindingHolderImpl
 import com.dicoding.dummyfilmapp.favourite.databinding.FragmentMovieFavouriteBinding
 import com.dicoding.dummyfilmapp.favourite.ui.FavouriteViewModel
 import com.dicoding.dummyfilmapp.ui.DetailFilmActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MovieFavouriteFragment : Fragment() {
+class MovieFavouriteFragment : Fragment(),
+    ViewBindingHolder<FragmentMovieFavouriteBinding> by ViewBindingHolderImpl() {
 
-    private lateinit var favouriteBinding: FragmentMovieFavouriteBinding
     private lateinit var movieFavListAdapter: MovieListAdapter
     private val favouriteViewModel: FavouriteViewModel by viewModel()
 
@@ -23,17 +25,8 @@ class MovieFavouriteFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View {
-        favouriteBinding =
-            FragmentMovieFavouriteBinding.inflate(layoutInflater, container, false)
-        return favouriteBinding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    ): View = initBinding(FragmentMovieFavouriteBinding.inflate(layoutInflater), this) {
         if (activity != null) {
-
             showLoading()
             movieFavListAdapter = MovieListAdapter()
             movieFavListAdapter.onItemClick = { movie ->
@@ -47,19 +40,24 @@ class MovieFavouriteFragment : Fragment() {
             favouriteViewModel.movieFav.observe(viewLifecycleOwner, {
                 showLoading(false)
                 movieFavListAdapter.setData(it)
-                favouriteBinding.tvEmpty.visibility =
+                tvEmpty.visibility =
                     if (it.isNotEmpty()) View.GONE else View.VISIBLE
             })
 
-            favouriteBinding.rvMovie.apply {
-                layoutManager = LinearLayoutManager(context)
-                adapter = movieFavListAdapter
-            }
+            setRecyclerView()
         }
     }
 
-    private fun showLoading(state: Boolean = true) {
-        favouriteBinding.apply {
+    private fun setRecyclerView() = requireBinding {
+        with(rvMovieFav) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = movieFavListAdapter
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun showLoading(state: Boolean = true) = requireBinding {
+        apply {
             if (state) pbLoading.visibility =
                 View.VISIBLE else pbLoading.visibility = View.GONE
         }

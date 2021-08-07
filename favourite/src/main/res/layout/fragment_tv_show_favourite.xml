@@ -7,7 +7,7 @@
     tools:context=".ui.fragment.TvShowFavouriteFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_tv"
+        android:id="@+id/rv_tv_fav"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -11,14 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.dummyfilmapp.R
 import com.dicoding.dummyfilmapp.core.data.Resource
 import com.dicoding.dummyfilmapp.core.ui.MovieListAdapter
+import com.dicoding.dummyfilmapp.core.ui.utils.ViewBindingHolder
+import com.dicoding.dummyfilmapp.core.ui.utils.ViewBindingHolderImpl
 import com.dicoding.dummyfilmapp.databinding.FragmentMovieBinding
 import com.dicoding.dummyfilmapp.ui.DetailFilmActivity
 import com.dicoding.dummyfilmapp.viewmodel.FilmViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MovieFragment : Fragment() {
+class MovieFragment : Fragment(),
+    ViewBindingHolder<FragmentMovieBinding> by ViewBindingHolderImpl() {
 
-    private lateinit var fragmentMovieBinding: FragmentMovieBinding
     private lateinit var movieListAdapter: MovieListAdapter
     private val filmViewModel: FilmViewModel by viewModel()
 
@@ -26,13 +28,7 @@ class MovieFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View {
-        fragmentMovieBinding = FragmentMovieBinding.inflate(layoutInflater, container, false)
-        return fragmentMovieBinding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    ): View = initBinding(FragmentMovieBinding.inflate(layoutInflater), this) {
 
         if (activity != null) {
 
@@ -64,16 +60,16 @@ class MovieFragment : Fragment() {
         }
     }
 
-    private fun setRecyclerView() {
-        with(fragmentMovieBinding.rvMovie) {
+    private fun setRecyclerView() = requireBinding {
+        with(rvMovie) {
             layoutManager = LinearLayoutManager(context)
             adapter = movieListAdapter
             setHasFixedSize(true)
         }
     }
 
-    private fun showLoading(state: Boolean = true) {
-        fragmentMovieBinding.apply {
+    private fun showLoading(state: Boolean = true) = requireBinding {
+        apply {
             if (state) pbLoading.visibility =
                 View.VISIBLE else pbLoading.visibility = View.GONE
         }

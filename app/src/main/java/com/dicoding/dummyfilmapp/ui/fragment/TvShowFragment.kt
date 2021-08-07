@@ -11,14 +11,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.dummyfilmapp.R
 import com.dicoding.dummyfilmapp.core.data.Resource
 import com.dicoding.dummyfilmapp.core.ui.TvShowListAdapter
+import com.dicoding.dummyfilmapp.core.ui.utils.ViewBindingHolder
+import com.dicoding.dummyfilmapp.core.ui.utils.ViewBindingHolderImpl
 import com.dicoding.dummyfilmapp.databinding.FragmentTvShowBinding
 import com.dicoding.dummyfilmapp.ui.DetailFilmActivity
 import com.dicoding.dummyfilmapp.viewmodel.FilmViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TvShowFragment : Fragment() {
+class TvShowFragment : Fragment(),
+    ViewBindingHolder<FragmentTvShowBinding> by ViewBindingHolderImpl() {
 
-    private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
     private lateinit var tvShowListAdapter: TvShowListAdapter
     private val filmViewModel: FilmViewModel by viewModel()
 
@@ -26,14 +28,7 @@ class TvShowFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View {
-        fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
-        return fragmentTvShowBinding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    ): View = initBinding(FragmentTvShowBinding.inflate(layoutInflater), this) {
         if (activity != null) {
 
             tvShowListAdapter = TvShowListAdapter()
@@ -64,16 +59,16 @@ class TvShowFragment : Fragment() {
         }
     }
 
-    private fun setRecyclerView() {
-        fragmentTvShowBinding.rvTv.apply {
+    private fun setRecyclerView() = requireBinding {
+        with(rvTv) {
             layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)
             adapter = tvShowListAdapter
         }
     }
 
-    private fun showLoading(state: Boolean = true) {
-        fragmentTvShowBinding.apply {
+    private fun showLoading(state: Boolean = true) = requireBinding {
+        apply {
             if (state) pbLoading.visibility =
                 View.VISIBLE else pbLoading.visibility = View.GONE
         }
