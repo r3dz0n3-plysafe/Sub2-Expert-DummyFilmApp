@@ -3,6 +3,7 @@ package com.dicoding.dummyfilmapp.core.data.source.remote.response.tvshow
 import com.google.gson.annotations.SerializedName
 
 data class TvShowResponse(
+    @SerializedName("id")
     val id: Int,
     @SerializedName("name")
     val title: String,
