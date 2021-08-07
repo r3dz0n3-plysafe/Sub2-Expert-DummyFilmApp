@@ -1,6 +1,8 @@
 # Sub2-Expert-DummyFilmApp
 [![<master>](https://circleci.com/gh/r3dz0n3-plysafe/Sub2-Expert-DummyFilmApp.svg?style=shield)](https://circleci.com/gh/r3dz0n3-plysafe/Sub2-Expert-DummyFilmApp)
-
+  
+  Submission for Menjadi Android Developer Expert dicoding with clean architecture(seperation of model) and modularization.
+  
   ## Built With 🛠
 * [Koin](https://github.com/InsertKoinIO/koin) for Dependency Injection
 * [Coroutine Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) An asynchronous data stream that sequentially emits values and completes normally or with an exception.
